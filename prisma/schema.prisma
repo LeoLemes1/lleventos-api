@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Agendamento {
+  id               String       @id @default(uuid())
+  nome             String       // nome do organizador
+  organizadorEmail String       // e‑mail do organizador
+  data             DateTime
+  horario          String
+  tema             String
+  tipo             String
+  info             String
+  token            String       @unique
+
+  convidados       Convidado[]  
+}
+
+model Convidado {
+  id            String      @id @default(uuid())
+  nome          String      
+  email         String
+  status        String      @default("PENDENTE")
+  agendamentoId String
+  agendamento   Agendamento @relation(fields: [agendamentoId], references: [id])
+}
