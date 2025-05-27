@@ -49,7 +49,8 @@ export default async function (app) {
       organizer({ nome }, token, linkDetalhes)
     );
     agendamento.convidados.forEach((c) => {
-      const linkConfirmacao = `http://localhost:3000/confirmar/${c.id}`;
+      const linkConfirmacao = `http://localhost:5173/confirmar/${c.id}`;
+
       sendEmail(
         c.email,
         `🎉 Você está convidado para ${tema}!`,
